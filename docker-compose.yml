@@ -1,0 +1,20 @@
+
+ap:
+  build: .
+  dockerfile: Dockerfile-AP
+  volumes:
+    - /var/www/docker/playground/www:/var/www/html
+    - /var/www/docker/playground/logs:/var/logs
+  links: 
+    - mysql:mysql
+  ports:
+    - 8080:80
+
+mysql:
+  build: .
+  dockerfile: Dockerfile-mysql
+  volumes:
+    - /var/www/docker/playground/mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: xxxxx
+
