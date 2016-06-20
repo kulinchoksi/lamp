@@ -4,7 +4,6 @@ LABEL Description = "This image is used to run PHP 7, Apache and some required u
 
 COPY php/php.ini /usr/local/etc/php/
 COPY www/ /var/www/html/
-COPY logs/* /var/logs/
 COPY apache/sites-available/* /etc/apache2/sites-available/
 
 RUN apt-get update && apt-get install -y \
@@ -14,8 +13,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get purge --auto-remove -y zlib1g-dev \
     && apt-get clean \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && mkdir /var/logs/playground /var/logs/dev \
-    && a2enmod rewrite && a2ensite dev playground && service apache2 restart
+    && mkdir -p /var/logs/playground /var/logs/root \
+    && a2enmod rewrite && a2ensite root playground && service apache2 restart
 
 COPY docker-library/php/7.0/apache/docker-php-ext-* /usr/local/bin/
 

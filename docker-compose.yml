@@ -1,20 +1,34 @@
+version: "2"
 
-ap:
-  build: .
-  dockerfile: Dockerfile-AP
-  volumes:
-    - /var/www/docker/playground/www:/var/www/html
-    - /var/www/docker/playground/logs:/var/logs
-  links: 
-    - mysql:mysql
-  ports:
-    - 8080:80
+services:
+  apache-php:
+    build:
+      context: .
+      dockerfile: ./apache/Dockerfile
+    image: apache-php:1.0
+    container_name: apache-php
+    volumes:
+      - ./www:/var/www/html
+      - ./logs:/var/logs
+    ports:
+      - "80:80"
+    environment:
+      DEVELOPMENT: 1
+    networks:
+      - back-tier
 
-mysql:
-  build: .
-  dockerfile: Dockerfile-mysql
-  volumes:
-    - /var/www/docker/playground/mysql:/var/lib/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: xxxxx
+  mysql-db:
+    build:
+      context: .
+      dockerfile: ./mysql/Dockerfile
+    image: mysql-db:1.0
+    container_name: mysql-db
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: xxxxx
+    networks:
+      - back-tier
 
+networks:
+  back-tier:
