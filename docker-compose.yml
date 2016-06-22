@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./apache/Dockerfile
-    image: apache-php:1.0
-    container_name: apache-php
+    image: apache_php:1.0
+    container_name: apache_php
     volumes:
       - ./www:/var/www/html
       - ./logs:/var/logs
