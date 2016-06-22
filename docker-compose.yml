@@ -1,12 +1,12 @@
 version: "2"
 
 services:
-  apache-php:
+  apache_2.4.10-php_7.0.3:
     build:
       context: .
       dockerfile: ./apache/Dockerfile
-    image: apache_php:1.0
-    container_name: apache_php
+    image: apache_2.4.10-php_7.0.3:1.0
+    container_name: apache_2.4.10-php_7.0.3
     volumes:
       - ./www:/var/www/html
       - ./logs:/var/logs
@@ -17,12 +17,12 @@ services:
     networks:
       - back-tier
 
-  mysql:
+  mysql_5.7.10:
     build:
       context: .
       dockerfile: ./mysql/Dockerfile
-    image: mysql:1.0
-    container_name: mysql
+    image: mysql_5.7.10:1.0
+    container_name: mysql_5.7.10
     volumes:
       - ./mysql/data:/var/lib/mysql
     environment:
