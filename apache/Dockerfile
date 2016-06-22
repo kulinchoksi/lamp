@@ -30,7 +30,8 @@ RUN apt-get update -qq \
         vim \
         zlib1g-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install pdo_mysql zip xdebug \
+    && docker-php-ext-install pdo_mysql zip \
+    && pecl install xdebug && docker-php-ext-enable xdebug \
     && apt-get purge --auto-remove -y zlib1g-dev \
     && apt-get clean \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
