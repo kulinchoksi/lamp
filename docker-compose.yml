@@ -17,12 +17,12 @@ services:
     networks:
       - back-tier
 
-  mysql-db:
+  mysql:
     build:
       context: .
       dockerfile: ./mysql/Dockerfile
-    image: mysql-db:1.0
-    container_name: mysql-db
+    image: mysql:1.0
+    container_name: mysql
     volumes:
       - ./mysql/data:/var/lib/mysql
     environment:
