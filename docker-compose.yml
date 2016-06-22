@@ -13,7 +13,7 @@ services:
     ports:
       - "8080:80"
     environment:
-      DEVELOPMENT: 1
+      environment: "development"
     networks:
       - back-tier
 
